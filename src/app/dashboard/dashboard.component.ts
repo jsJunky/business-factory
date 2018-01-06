@@ -10,11 +10,16 @@ import { RecordService } from './services/record.service';
 export class DashboardComponent implements OnInit {
   public titles: string[] = ['Title', 'Division', 'Project Owner', 'Budget', 'Status', 'Created', 'Modified'];
   public records: Record[] = [];
+  public owners: string[] = [];
+  public statusTypes: string[] = [];
 
   constructor(private recordService: RecordService) { }
 
   ngOnInit() {
     this.records = this.recordService.fetchRecords();
+    this.owners = this.recordService.fetchProjectOwners();
+    this.statusTypes = this.recordService.fetchStatusTypes();
+    console.log('statusTypes', this.statusTypes);
   }
 
 }

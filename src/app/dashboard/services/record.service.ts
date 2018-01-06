@@ -9,7 +9,6 @@ type RecordFilter = (value?: Record, index?: number, array?: Record[] ) => Recor
 export class RecordService {
 
   private records: Record[] = [];
-  private filteredRecords: Record[];
 
   constructor() { }
 
@@ -17,7 +16,7 @@ export class RecordService {
    * This should idealy be an HTTP request. Super simple caching so we don't create records on each request.
    * Though for this app we will just be calling this at the start.
   */
-  fetchRecords(): Record[] {
+  public fetchRecords(): Record[] {
     if (!this.records.length) {
       this.records = data.map(record => new Record(
         record.title,
@@ -33,11 +32,23 @@ export class RecordService {
     return this.records;
   }
 
-  filterRecords(filters: RecordFilter[]): Record[] {
-    this.filteredRecords = [...this.records];
+  public filterRecords(filters: RecordFilter[]): Record[] {
+    let filteredRecords: Record[] = [...this.records];
     filters.forEach((filter: RecordFilter) => {
-      this.filteredRecords = this.filteredRecords.filter(filter);
+      filteredRecords = filteredRecords.filter(filter);
     });
-    return this.filteredRecords;
+
+    return filteredRecords;
   }
+
+  public fetchProjectOwners(): string[] {
+    const owners: string[] = this.records.map(({project_owner}) => project_owner);
+    return Array.from(new Set(owners));
+  }
+
+  public fetchStatusTypes(): string[] {
+    const statuses: string[] = this.records.map(({status}) => status);
+    return Array.from(new Set(statuses));
+  }
+
 }
