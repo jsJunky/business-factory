@@ -1,17 +1,13 @@
 <section class="container">
   <div class="row">
-    <div class="col s12">
-      
-    </div>
+    <app-stats [recordsObs]="records"></app-stats>
   </div>
   <div class="row">
     <div class="col s12">
       <div class="card">
         <div class="card-content">
           <app-record-table
-            [records]="records"
-            [owners]="owners"
-            [statusTypes]="statusTypes"
+            [recordsObs]="records"
             (filterChange)="onFilterChange($event)"
           >
           </app-record-table>

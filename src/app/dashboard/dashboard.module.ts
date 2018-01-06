@@ -7,13 +7,14 @@ import { SearchComponent } from './components/filters/search/search.component';
 import { RecordService } from './services/record.service';
 import { MomentDatePipe } from '../pipes/moment-date.pipe';
 import { RecordTableComponent } from './components/record-table/record-table.component';
+import { StatsComponent } from './components/stats/stats.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule
   ],
-  declarations: [DashboardComponent, DateComponent, SearchComponent, MomentDatePipe, RecordTableComponent],
+  declarations: [DashboardComponent, DateComponent, SearchComponent, MomentDatePipe, RecordTableComponent, StatsComponent],
   exports: [DashboardComponent],
   providers: [RecordService]
 })

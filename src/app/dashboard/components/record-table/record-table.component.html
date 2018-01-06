@@ -22,7 +22,7 @@
           </select>
         </td>
         <td>
-          <input type="number" step=".01" [(ngModel)]="record.budget"/>
+          <input type="number" step=".01" [ngModel]="record.budget"/>
           <p class="red-text error" *ngIf="!isBudgetValid(record.budget)">Required. Max 2 decimals places</p>
         </td>
         <td>

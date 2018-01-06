@@ -50,12 +50,12 @@ export class RecordService {
     this.recordsSubject.next(filteredRecords);
   }
 
-  public fetchProjectOwners(): string[] {
+  public getProjectOwners(): string[] {
     const owners: string[] = this.records.map(({project_owner}) => project_owner);
     return Array.from(new Set(owners));
   }
 
-  public fetchStatusTypes(): string[] {
+  public getStatusTypes(): string[] {
     const statuses: string[] = this.records.map(({status}) => status);
     return Array.from(new Set(statuses));
   }
