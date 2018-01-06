@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
     this.records = this.recordService.fetchRecords();
     this.owners = this.recordService.fetchProjectOwners();
     this.statusTypes = this.recordService.fetchStatusTypes();
-    console.log('statusTypes', this.statusTypes);
   }
 
   public isBudgetValid(budget: number): boolean {
