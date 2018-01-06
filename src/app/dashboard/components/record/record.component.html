@@ -1,0 +1,19 @@
+<td>{{record.title}}</td>
+<td>{{record.division}}</td>
+<td>
+  <select [ngModel]="record.project_owner" (ngModelChange)="updateOwner($event, record)">
+    <option *ngFor="let owner of owners" [value]="owner">{{owner}}</option>
+  </select>
+</td>
+<td>
+  <input [ngModel]="record.budget" (change)="updateBudget($event, record)"/>
+  <p class="red-text error" *ngIf="!isBudgetValid(record.budget)">Required. Max 2 decimals places</p>
+</td>
+<td>
+  <select [ngModel]="record.status" (ngModelChange)="updateStatus($event, record)">
+    <option *ngFor="let status of statusTypes" [value]="status">{{status}}</option>
+  </select>
+</td>
+<td>{{record.created | momentDate}}</td>
+<td>{{record.modified | momentDate}}</td>
+<td class="animation-trigger" *ngIf="record.updated"></td>

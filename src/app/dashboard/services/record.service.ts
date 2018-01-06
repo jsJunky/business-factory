@@ -20,18 +20,23 @@ export class RecordService {
   */
   public fetchRecords(): BehaviorSubject<Record[]> {
     if (!this.records.length) {
-      this.records = data.map(record => new Record(
-        record.title,
-        record.division,
-        record.project_owner,
-        record.budget,
-        record.status,
-        record.created,
-        record.modified
-      ));
+      this.records = data.map(record => new Record(record));
     }
     this.recordsSubject.next(this.records);
     return this.recordsSubject;
+  }
+
+  public updateRecord(newRecord: Record, index: number): void {
+    this.records = [
+      ...this.records.slice(0, index),
+      newRecord,
+      ...this.records.slice(index + 1)
+    ].map((record: Record) => {
+      record.updated = false;
+      return record;
+    });
+    newRecord.updated = true;
+    this.recordsSubject.next(this.records);
   }
 
   public filterRecords(newFilter: RecordFilter): void {

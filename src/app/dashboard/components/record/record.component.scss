@@ -1,0 +1,48 @@
+
+:host {
+    select {
+        display: block;
+    }
+
+    input[type=number]:not(.browser-default) {
+        margin: 0;
+        padding-left: 15px;
+        width: 80%;
+    }
+
+    td {
+        position: relative;
+    }
+
+    .prefix {
+        position: absolute;
+        top: 3.2vh;
+        left: 0.3vw;
+    }
+
+    .error {
+        font-size: 8pt;
+        position: absolute;
+    }
+
+    .animation-trigger {
+        background-color: rgb(19, 126, 19);
+        -webkit-animation: fadein 2s;
+        animation: fadein 2s;
+        opacity: 0;
+    }
+    
+    @keyframes fadein {
+        0%    { opacity: 0; }
+        50%   { opacity: 1; }
+        100%  { opacity: 0; }
+    }
+    
+    /* Safari, Chrome and Opera > 12.1 */
+    @-webkit-keyframes fadein {
+        0%    { opacity: 0; }
+        50%   { opacity: 1; }
+        100%  { opacity: 0; }
+    }
+
+}

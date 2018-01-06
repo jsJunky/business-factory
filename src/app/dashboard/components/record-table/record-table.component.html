@@ -13,25 +13,12 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let record of records">
-        <td>{{record.title}}</td>
-        <td>{{record.division}}</td>
-        <td>
-          <select [(ngModel)]="record.project_owner">
-            <option *ngFor="let owner of owners" [value]="owner">{{owner}}</option>
-          </select>
-        </td>
-        <td>
-          <input type="number" step=".01" [ngModel]="record.budget"/>
-          <p class="red-text error" *ngIf="!isBudgetValid(record.budget)">Required. Max 2 decimals places</p>
-        </td>
-        <td>
-          <select [(ngModel)]="record.status">
-            <option *ngFor="let status of statusTypes" [value]="status">{{status}}</option>
-          </select>
-        </td>
-        <td>{{record.created | momentDate}}</td>
-        <td>{{record.modified | momentDate}}</td>
-      </tr>
+      <tr app-record
+        *ngFor="let record of records; let i = index;"
+        [record]="record"
+        [owners]="owners"
+        [statusTypes]="statusTypes"
+        (update)="broadcastRecordChanges($event, i)"
+      ></tr>
     </tbody>
   </table>

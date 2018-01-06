@@ -20,8 +20,4 @@ export class DashboardComponent implements OnInit {
     this.records = this.recordService.fetchRecords();
   }
 
-  public onFilterChange(filters: RecordFilter) {
-    this.recordService.filterRecords(filters);
-  }
-
 }

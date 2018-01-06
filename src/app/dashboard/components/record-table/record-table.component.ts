@@ -16,10 +16,6 @@ export class RecordTableComponent implements OnInit, OnDestroy {
   public records: Record[] = [];
   public owners: string[] = [];
   public statusTypes: string[] = [];
-
-  @Output() public filterChange: EventEmitter<RecordFilter> = new EventEmitter<RecordFilter>();
-  @Output() public modelUpdate: EventEmitter<Record> = new EventEmitter<Record>();
-
   public searchHeaders: any[] = [
     {title: 'Title', property: 'title'},
     {title: 'Division', property: 'division'},
@@ -33,11 +29,12 @@ export class RecordTableComponent implements OnInit, OnDestroy {
     {title: 'Modified', property: 'modified'}
   ];
 
+  private lastUpdated: number = -1;
   private unsubscribeAll: Subject<void> = new Subject<void>();
 
   constructor(private recordService: RecordService) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.recordsObs
       .takeUntil(this.unsubscribeAll)
       .subscribe((records: Record[]) => {
@@ -47,16 +44,15 @@ export class RecordTableComponent implements OnInit, OnDestroy {
       });
   }
 
-  public isBudgetValid(budget: number): boolean {
-    const budgetValues: string[] = String(budget).split('.');
-    return budget
-      && budgetValues.length <= 2
-      && budgetValues[1].length <= 2;
+  public broadcastFilterChange(filter: RecordFilter): void {
+    this.recordService.filterRecords(filter);
   }
 
-  public broadcastFilterChange(filter: RecordFilter) {
-    this.filterChange.emit(filter);
+  public broadcastRecordChanges(record: Record, index: number): void {
+    this.recordService.updateRecord(record, index);
+    this.lastUpdated = index;
   }
+
 
   ngOnDestroy(): void {
     this.unsubscribeAll.next();
