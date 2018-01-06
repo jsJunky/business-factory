@@ -22,4 +22,11 @@ export class DashboardComponent implements OnInit {
     console.log('statusTypes', this.statusTypes);
   }
 
+  public isBudgetValid(budget: number): boolean {
+    const budgetValues: string[] = String(budget).split('.');
+    return budget
+      && budgetValues.length <= 2
+      && budgetValues[1].length <= 2;
+  }
+
 }
