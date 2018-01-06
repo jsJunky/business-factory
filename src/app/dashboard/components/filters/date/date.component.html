@@ -1,3 +1,4 @@
-<p>
-  date works!
-</p>
+<div class="date-selection">
+  <input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event; onChange(startDate, endDate)" type="date" name="startDate"/>
+  <input [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event; onChange(startDate, endDate)" type="date" name="endDate"/>
+</div>

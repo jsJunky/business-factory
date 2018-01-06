@@ -1,65 +1,20 @@
 <section class="container">
   <div class="row">
     <div class="col s12">
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
       <div class="card">
         <div class="card-content">
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="title"></app-search-filter>
-                  Title
-                </th>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="division"></app-search-filter>
-                  Division
-                </th>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="project_owner"></app-search-filter>
-                  Project Owner
-                </th>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="budget"></app-search-filter>
-                  Budget
-                </th>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="status"></app-search-filter>
-                  Status
-                </th>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="title"></app-search-filter>
-                  Created
-                </th>
-                <th>
-                  <app-search-filter (filter)="broadcastFilterChange($event)" property="title"></app-search-filter>
-                  Modified
-                </th>
-              </tr>
-            </thead>
-    
-            <tbody>
-              <tr *ngFor="let record of records">
-                <td>{{record.title}}</td>
-                <td>{{record.division}}</td>
-                <td>
-                  <select [(ngModel)]="record.project_owner">
-                    <option *ngFor="let owner of owners" [value]="owner">{{owner}}</option>
-                  </select>
-                </td>
-                <td>
-                  <input type="number" step=".01" [(ngModel)]="record.budget"/>
-                  <p class="red-text error" *ngIf="!isBudgetValid(record.budget)">Required. Max 2 decimals places</p>
-                </td>
-                <td>
-                  <select [(ngModel)]="record.status">
-                    <option *ngFor="let status of statusTypes" [value]="status">{{status}}</option>
-                  </select>
-                </td>
-                <td>{{record.created | momentDate}}</td>
-                <td>{{record.modified | momentDate}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <app-record-table
+            [records]="records"
+            [owners]="owners"
+            [statusTypes]="statusTypes"
+            (filterChange)="onFilterChange($event)"
+          >
+          </app-record-table>
         </div>
       </div>
     </div>

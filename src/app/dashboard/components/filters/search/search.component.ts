@@ -12,7 +12,7 @@ export class SearchComponent {
   @Input() public property: string;
   public searchValue: string;
 
-  public onChange(filterText: string) {
+  public onChange(filterText: string): void {
     const property = this.property;
     const recordFilter = new RecordFilter(
       property,

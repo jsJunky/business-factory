@@ -1,0 +1,37 @@
+<table>
+    <thead>
+      <tr>
+        <th *ngFor="let header of searchHeaders">
+          <app-search-filter (filter)="broadcastFilterChange($event)" [property]="header.property"></app-search-filter>
+          {{header.title}}
+        </th>
+        <th *ngFor="let header of dateHeaders">
+          <app-date-filter (filter)="broadcastFilterChange($event)" [property]="header.property"></app-date-filter>
+          {{header.title}}
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let record of records">
+        <td>{{record.title}}</td>
+        <td>{{record.division}}</td>
+        <td>
+          <select [(ngModel)]="record.project_owner">
+            <option *ngFor="let owner of owners" [value]="owner">{{owner}}</option>
+          </select>
+        </td>
+        <td>
+          <input type="number" step=".01" [(ngModel)]="record.budget"/>
+          <p class="red-text error" *ngIf="!isBudgetValid(record.budget)">Required. Max 2 decimals places</p>
+        </td>
+        <td>
+          <select [(ngModel)]="record.status">
+            <option *ngFor="let status of statusTypes" [value]="status">{{status}}</option>
+          </select>
+        </td>
+        <td>{{record.created | momentDate}}</td>
+        <td>{{record.modified | momentDate}}</td>
+      </tr>
+    </tbody>
+  </table>

@@ -28,14 +28,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.statusTypes = this.recordService.fetchStatusTypes();
   }
 
-  public isBudgetValid(budget: number): boolean {
-    const budgetValues: string[] = String(budget).split('.');
-    return budget
-      && budgetValues.length <= 2
-      && budgetValues[1].length <= 2;
-  }
-
-  public broadcastFilterChange(filters: RecordFilter) {
+  public onFilterChange(filters: RecordFilter) {
     this.recordService.filterRecords(filters);
   }
 
