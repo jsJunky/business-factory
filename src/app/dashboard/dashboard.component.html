@@ -1,3 +1,29 @@
-<p>
-  dashboard works!
-</p>
+<section class="container">
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <table>
+            <thead>
+              <tr>
+                <th *ngFor="let title of titles">{{title}}</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+              <tr *ngFor="let record of records">
+                <td>{{record.title}}</td>
+                <td>{{record.division}}</td>
+                <td>{{record.project_owner}}</td>
+                <td>{{record.budget}}</td>
+                <td>{{record.status}}</td>
+                <td>{{record.created}}</td>
+                <td>{{record.modified}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
