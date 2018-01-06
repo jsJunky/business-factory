@@ -26,33 +26,29 @@ export class RecordService {
     return this.recordsSubject;
   }
 
-  public updateRecord(newRecord: Record, index: number): void {
+  public updateRecord(newRecord: Record, oldRecord: Record): void {
+    const index = this.records.findIndex(r => r === oldRecord);
+    newRecord.updated = true;
+    this.records = this.records.map((record: Record) => {
+      record.updated = false;
+      return record;
+    });
     this.records = [
       ...this.records.slice(0, index),
       newRecord,
       ...this.records.slice(index + 1)
-    ].map((record: Record) => {
-      record.updated = false;
-      return record;
-    });
-    newRecord.updated = true;
-    this.recordsSubject.next(this.records);
+    ];
+    this.recordsSubject.next(this.filterRecordsByFilters(this.filters, this.records));
   }
 
   public filterRecords(newFilter: RecordFilter): void {
-    let filteredRecords: Record[] = [...this.records];
-
     if (this.containsFilter(this.filters, newFilter)) {
       this.filters = [...this.removeFilter(this.filters, newFilter), newFilter];
     } else {
       this.filters = [...this.filters, newFilter];
     }
 
-    this.filters.forEach((filter: RecordFilter) => {
-      filteredRecords = filteredRecords.filter(filter.func);
-    });
-
-    this.recordsSubject.next(filteredRecords);
+    this.recordsSubject.next(this.filterRecordsByFilters(this.filters, this.records));
   }
 
   public getProjectOwners(): string[] {
@@ -63,6 +59,14 @@ export class RecordService {
   public getStatusTypes(): string[] {
     const statuses: string[] = this.records.map(({status}) => status);
     return Array.from(new Set(statuses));
+  }
+
+  private filterRecordsByFilters(filters: RecordFilter[], records: Record[]) {
+    let filteredRecords: Record[] = [...this.records];
+    filters.forEach((filter: RecordFilter) => {
+      filteredRecords = filteredRecords.filter(filter.func);
+    });
+    return filteredRecords;
   }
 
   private containsFilter(filters: RecordFilter[], filter: RecordFilter): boolean {

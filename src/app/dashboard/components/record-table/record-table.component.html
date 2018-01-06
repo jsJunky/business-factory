@@ -14,11 +14,11 @@
 
     <tbody>
       <tr app-record
-        *ngFor="let record of records; let i = index;"
+        *ngFor="let record of records;"
         [record]="record"
         [owners]="owners"
         [statusTypes]="statusTypes"
-        (update)="broadcastRecordChanges($event, i)"
+        (update)="broadcastRecordChanges($event, record)"
       ></tr>
     </tbody>
   </table>

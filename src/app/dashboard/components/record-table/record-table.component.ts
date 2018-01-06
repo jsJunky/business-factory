@@ -29,7 +29,6 @@ export class RecordTableComponent implements OnInit, OnDestroy {
     {title: 'Modified', property: 'modified'}
   ];
 
-  private lastUpdated: number = -1;
   private unsubscribeAll: Subject<void> = new Subject<void>();
 
   constructor(private recordService: RecordService) {}
@@ -48,9 +47,8 @@ export class RecordTableComponent implements OnInit, OnDestroy {
     this.recordService.filterRecords(filter);
   }
 
-  public broadcastRecordChanges(record: Record, index: number): void {
-    this.recordService.updateRecord(record, index);
-    this.lastUpdated = index;
+  public broadcastRecordChanges(record: Record, oldRecord: Record): void {
+    this.recordService.updateRecord(record, oldRecord);
   }
 
 
