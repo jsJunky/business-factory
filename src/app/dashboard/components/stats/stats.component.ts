@@ -28,7 +28,7 @@ export class StatsComponent implements OnInit {
         this.statusCounts = this.getCountsByProperty(records, 'status');
         this.projectOwnerCounts = this.getCountsByProperty(records, 'project_owner');
         this.totalBudget = records.reduce((total: number, record: Record) => total + record.budget, 0);
-        this.averageBudget = this.totalBudget / (records.length + 1);
+        this.averageBudget = this.totalBudget / records.length;
       });
   }
 
