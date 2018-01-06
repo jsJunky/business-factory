@@ -17,8 +17,8 @@
                 <td>{{record.project_owner}}</td>
                 <td>{{record.budget}}</td>
                 <td>{{record.status}}</td>
-                <td>{{record.created}}</td>
-                <td>{{record.modified}}</td>
+                <td>{{record.created | momentDate}}</td>
+                <td>{{record.modified | momentDate}}</td>
               </tr>
             </tbody>
           </table>
