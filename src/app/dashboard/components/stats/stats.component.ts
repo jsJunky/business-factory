@@ -34,14 +34,14 @@ export class StatsComponent implements OnInit {
 
   private getCountsByProperty(records: Record[], property: string): string[] {
     const counts = records.
-    reduce((totalCounts, record: Record) => {
-      if (totalCounts[record[property]]) {
-        totalCounts[record[property]]++;
-      } else {
-        totalCounts[record[property]] = 1;
-      }
-      return totalCounts;
-    }, {});
+      reduce((totalCounts, record: Record) => {
+        if (totalCounts[record[property]]) {
+          totalCounts[record[property]]++;
+        } else {
+          totalCounts[record[property]] = 1;
+        }
+        return totalCounts;
+      }, {});
 
     const sortedByCount = Object.keys(counts)
       .map((key: string): {key: string, value: number} => ({key, value: counts[key]}));
